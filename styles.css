@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+  zoom: 1;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+
+  background-image: url('https://source.unsplash.com/random/?landscape,grass,park,night');
+  background-color: rgba(0, 0, 0, 0.7);
+  background-blend-mode: overlay; /* Mezcla de modos para aplicar la opacidad */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+img {
+  user-select: none;
+  padding: 0;
+  margin: 0;
+  cursor: grab;
+  position: fixed;
+  filter: drop-shadow(15px 15px 2px rgba(0,0,0,0.5) );
+  transition: transform 0.2s;
+}
+
+img[src="aplastado.gif"] {
+  cursor: default;
+  filter: none;
+  animation: desaparecer 3s forwards;
+  filter: drop-shadow(0px 0px 15px rgba(255,0,0,0.7) );
+}
+
+@keyframes desaparecer {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
