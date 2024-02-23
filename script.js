@@ -42,25 +42,18 @@ function generarMosquito() {
   
   // Posicionar el mosquito fuera del viewport
   const posicion = Math.floor(Math.random() * 4); // 0, 1, 2, o 3
-  switch (posicion) {
-    case 0: // Izquierda
-      mosquito.style.left = `-${mosquito.width}px`;
-      mosquito.style.top = Math.random() * (window.innerHeight - parseFloat(mosquito.height)) + 'px';
-      break;
-    case 1: // Derecha
-      mosquito.style.left = `${window.innerWidth+mosquito.width}px`;
-      mosquito.style.top = Math.random() * (window.innerHeight - parseFloat(mosquito.height)) + 'px';
-      break;
-    case 2: // Arriba
-      mosquito.style.left = Math.random() * (window.innerWidth - parseFloat(mosquito.width)) + 'px';
-      mosquito.style.top = `-${mosquito.height}px`;
-      break;
-    case 3: // Abajo
-      // mosquito.style.left = Math.random() * (window.innerWidth - parseFloat(mosquito.width)) + 'px';
-      // mosquito.style.top = `${window.innerHeight+mosquito.height}px`;
-      mosquito.style.left = Math.random() * (window.innerWidth - parseFloat(mosquito.width)) + 'px';
-      mosquito.style.top = `-${mosquito.height}px`;
-      break;
+  if (posicion === 0) { // Izquierda
+    mosquito.style.left = `-${mosquito.width}px`;
+    mosquito.style.top = Math.random() * (window.innerHeight - parseFloat(mosquito.height)) + 'px';
+  } else if (posicion === 1) { // Derecha
+    mosquito.style.left = `${window.innerWidth+mosquito.width}px`;
+    mosquito.style.top = Math.random() * (window.innerHeight - parseFloat(mosquito.height)) + 'px';
+  } else if (posicion === 2 || posicion === 3) { // Arriba y abajo
+    mosquito.style.left = Math.random() * (window.innerWidth - parseFloat(mosquito.width)) + 'px';
+    mosquito.style.top = `-${mosquito.height}px`;
+  } else if (posicion === 3) { // Abajo
+    mosquito.style.left = Math.random() * (window.innerWidth - parseFloat(mosquito.width)) + 'px';
+    mosquito.style.top = `${window.innerHeight+mosquito.height}px`;
   }
   
   // Setear la opacidad basada en el tamaño del mosquito
