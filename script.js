@@ -222,13 +222,20 @@ function getRandomVelocidad() {
   return Math.random() * (params.velocidadMax - params.velocidadMin) + params.velocidadMin;
 }
 
+
 // Función de animación
 function animar() { 
   actualizarMosquitos();
-  document.title = `Mosquitos (${mosquitos.length}) 🦟`;
-  const porcentaje = Math.floor((mosquitos.length / params.cantMax) * 100);
-  document.querySelector('#info').innerText = `🦟 ${mosquitos.length} (${porcentaje}%)`;
+  const cantMosquitosVivos = cantVivos() ?? 0;
+  document.title = `Mosquitos (${cantMosquitosVivos}) 🦟`;
+  const porcentaje = Math.floor((cantMosquitosVivos / params.cantMax) * 100);
+  document.querySelector('#info').innerText = `${cantMosquitosVivos} 🦟 ${porcentaje}%`;
   window.requestAnimationFrame(animar);
+}
+
+// Función para contar la cantidad de mosquitos vivos
+function cantVivos() {
+  return mosquitos.filter(f=>!f.isDead)?.length ?? 0;
 }
 
 // Función para matar a todos los mosquitos
@@ -245,11 +252,10 @@ function init() {
   for(let i = 0; i < cantidadMosquitosInicial; i++) {
     generarMosquito();
   }
+  animar();
 }
 
-animar();
-
 const timer = setInterval(() => {
-  if (mosquitos.length <= 0) init();
-  if (mosquitos.length < params.cantMax) generarMosquito();
+  if (cantVivos() <= 0) init();
+  if (cantVivos() < params.cantMax) generarMosquito();
 }, 2000);
