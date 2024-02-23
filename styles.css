@@ -67,7 +67,6 @@ img[src="aplastado.gif"] {
   filter: none;
   animation: desaparecer 3s forwards;
   filter: drop-shadow(0px 0px 15px rgba(255,0,0,0.7) );
-  pointer-events: none;
 }
 
 @keyframes desaparecer {

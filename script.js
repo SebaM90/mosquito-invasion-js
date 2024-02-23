@@ -82,16 +82,17 @@ function generarMosquito() {
   // mosquito.style.filter = `saturate(${rndSat})`;
 
   
-  // mosquito.addEventListener('click', () => {
-  //   aplastarMosquito(mosquito);
-  // });
-
-  mosquito.addEventListener('mousedown', function(event) {
+  mosquito.addEventListener('click', (event) => {
     event.stopPropagation();
     aplastarMosquito(mosquito);
   });
 
-  mosquito.addEventListener('touchstart', function(event) {
+  mosquito.addEventListener('mousedown', (event) => {
+    event.stopPropagation();
+    aplastarMosquito(mosquito);
+  });
+
+  mosquito.addEventListener('touchstart', (event) => {
     event.stopPropagation();
     aplastarMosquito(mosquito);
   });
@@ -114,34 +115,31 @@ function generarMosquito() {
 
 // Aplastar mosquito haciendo un efecto de cambio de imagen
 function aplastarMosquito(mosquito) {
-  let index = mosquitos.findIndex(m => m.elemento === mosquito);
-  if (index !== -1) {
-    mosquitos[index].isDead = true;
-    mosquitos[index].imgSrc = 'aplastado.gif';
-    detenerMosquito(mosquito);
-    audio.pause(); // Pausar el sonido
-    audio.currentTime = 0; // Volver al principio del audio
-    audio.play();
-    setTimeout(() => eliminarMosquito(mosquito), 3000);
-  };
+  const foundMosquito = mosquitos.find(m => m.elemento === mosquito);
+  if (!foundMosquito || foundMosquito.isDead) return;
+  foundMosquito.isDead = true;
+  foundMosquito.imgSrc = 'aplastado.gif';
+  detenerMosquito(mosquito);
+  audio.pause(); // Pausar el sonido
+  audio.currentTime = 0; // Volver al principio del audio
+  audio.play();
+  setTimeout(() => eliminarMosquito(mosquito), 3000);
 }
 
 // Eliminar un mosquito del DOM y del array
 function eliminarMosquito(mosquito) {
-  const index = mosquitos.findIndex(m => m.elemento === mosquito);
-  if (index !== -1) {
+  const indexMosquito = mosquitos.findIndex(m => m.elemento === mosquito);
+  if (indexMosquito !== -1) {
     mosquito.parentNode.removeChild(mosquito); // Elimino el mosquito del DOM
-    mosquitos.splice(index, 1); // Elimino el mosquito del array
-  };
+    mosquitos.splice(indexMosquito, 1); // Elimino el mosquito del array
+  }
 }
 
 // Detener un mosquito
 function detenerMosquito(mosquito) {
-  const index = mosquitos.findIndex(m => m.elemento === mosquito);
-  if (index !== -1) {
-    mosquitos[index].velocidadX = 0;
-    mosquitos[index].velocidadY = 0;
-  };
+  const foundMosquito = mosquitos.find(m => m.elemento === mosquito);
+  foundMosquito.velocidadX = 0;
+  foundMosquito.velocidadY = 0;
 }
 
 
