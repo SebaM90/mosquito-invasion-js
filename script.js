@@ -243,7 +243,10 @@ function killAllMosquitos() {
   mosquitos.forEach(mosquito => {
     aplastarMosquito(mosquito.elemento);
   });
-  init();
+  document.querySelector('#killAll').style.pointerEvents = 'none';
+  setTimeout(() => {
+    document.querySelector('#killAll').style.pointerEvents = 'auto';
+  }, 3000);
 }
 
 // Iniciar la animación
@@ -252,10 +255,14 @@ function init() {
   for(let i = 0; i < cantidadMosquitosInicial; i++) {
     generarMosquito();
   }
-  animar();
 }
 
+animar();
+
+// entero aleatorio:
+const rndTime = Math.floor(Math.random() * (4000 - 500 + 1)) + 500; // Tiempo aleatorio entre 0.5 y 4 segundos
+console.log(`🔥 Se generará un mosquito cada ${rndTime}ms`);
 const timer = setInterval(() => {
   if (cantVivos() <= 0) init();
-  if (cantVivos() < params.cantMax) generarMosquito();
-}, 2000);
+  else if (cantVivos() < params.cantMax) generarMosquito();
+}, rndTime);
