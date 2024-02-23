@@ -223,7 +223,7 @@ function getRandomVelocidad() {
 }
 
 // Función de animación
-function animar() {
+function animar() { 
   actualizarMosquitos();
   document.title = `Mosquitos (${mosquitos.length}) 🦟`;
   const porcentaje = Math.floor((mosquitos.length / params.cantMax) * 100);
@@ -247,9 +247,9 @@ function init() {
   }
 }
 
-init();
 animar();
 
 const timer = setInterval(() => {
+  if (mosquitos.length <= 0) init();
   if (mosquitos.length < params.cantMax) generarMosquito();
 }, 2000);
