@@ -92,6 +92,7 @@ function generarMosquito() {
     aplastarMosquito(mosquito);
   });
 
+  // Para dispositivos móviles
   mosquito.addEventListener('touchstart', (event) => {
     event.stopPropagation();
     aplastarMosquito(mosquito);
@@ -116,7 +117,7 @@ function generarMosquito() {
 // Aplastar mosquito haciendo un efecto de cambio de imagen
 function aplastarMosquito(mosquito) {
   const foundMosquito = mosquitos.find(m => m.elemento === mosquito);
-  if (!foundMosquito || foundMosquito.isDead) return;
+  if (!foundMosquito || foundMosquito.isDead) return; // Si el mosquito no existe o ya está muerto, no hacer nada
   foundMosquito.isDead = true;
   foundMosquito.imgSrc = 'aplastado.gif';
   detenerMosquito(mosquito);
