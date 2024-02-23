@@ -98,7 +98,7 @@ function generarMosquito() {
   });
 
   // Deshabilitar el arrastre cuando se mueve el mouse
-  mosquito.addEventListener('dragstart', function(event) {
+  mosquito.addEventListener('dragstart', (event) => {
     event.preventDefault();
   });
 
