@@ -5,7 +5,7 @@ const params = {
   velocidadMax: 5,
   tamanioMin: 20,
   tamanioMax: 70,
-  cantInicialMin: 5,
+  cantInicialMin: 3,
   cantInicialMax: 10,
   cantMax: 70,
   opacidadMin: 0.1,
@@ -30,7 +30,8 @@ function generarMosquito() {
   if (Math.random() < 0.01) {
     const anchoViewport = window.innerWidth;
     tamanio = '400';
-    if (tamanio >= anchoViewport) tamanio = anchoViewport*.8;
+    // (Celulares) Si el tamaño del mosquito es mayor al ancho del viewport, reducirlo
+    if (tamanio >= anchoViewport) tamanio = anchoViewport * .8;
     mosquito.style.zIndex = '1000';
   }
   mosquito.style.position = 'fixed';
@@ -87,13 +88,11 @@ function generarMosquito() {
 
   mosquito.addEventListener('mousedown', function(event) {
     event.stopPropagation();
-    mosquito.style.pointerEvents = 'none';
     aplastarMosquito(mosquito);
   });
 
   mosquito.addEventListener('touchstart', function(event) {
     event.stopPropagation();
-    mosquito.style.pointerEvents = 'none';
     aplastarMosquito(mosquito);
   });
 
@@ -235,6 +234,8 @@ function getRandomVelocidad() {
 function animar() {
   actualizarMosquitos();
   document.title = `Mosquitos (${mosquitos.length}) 🦟`;
+  const porcentaje = Math.floor((mosquitos.length / params.cantMax) * 100);
+  document.querySelector('#info').innerText = `🦟 ${mosquitos.length} (${porcentaje}%)`;
   window.requestAnimationFrame(animar);
 }
 
@@ -243,15 +244,20 @@ function killAllMosquitos() {
   mosquitos.forEach(mosquito => {
     aplastarMosquito(mosquito.elemento);
   });
+  init();
 }
 
 // Iniciar la animación
-const cantidadMosquitosInicial = Math.floor(Math.random() * (params.cantInicialMax - params.cantInicialMin + 1)) + params.cantInicialMin;
-for(let i = 0; i < cantidadMosquitosInicial; i++) {
-  generarMosquito();
+function init() {
+  const cantidadMosquitosInicial = Math.floor(Math.random() * (params.cantInicialMax - params.cantInicialMin + 1)) + params.cantInicialMin;
+  for(let i = 0; i < cantidadMosquitosInicial; i++) {
+    generarMosquito();
+  }
 }
+
+init();
 animar();
 
 const timer = setInterval(() => {
-  if (mosquitos.length <= params.cantMax) generarMosquito();
+  if (mosquitos.length < params.cantMax) generarMosquito();
 }, 2000);
