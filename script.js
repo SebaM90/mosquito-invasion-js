@@ -222,6 +222,10 @@ function getRandomVelocidad() {
   return Math.random() * (params.velocidadMax - params.velocidadMin) + params.velocidadMin;
 }
 
+// Función para contar la cantidad de mosquitos vivos
+function cantVivos() {
+  return mosquitos.filter(f=>!f.isDead)?.length ?? 0;
+}
 
 // Función de animación
 function animar() { 
@@ -231,11 +235,6 @@ function animar() {
   const porcentaje = Math.floor((cantMosquitosVivos / params.cantMax) * 100);
   document.querySelector('#info').innerText = `${cantMosquitosVivos} 🦟 ${porcentaje}%`;
   window.requestAnimationFrame(animar);
-}
-
-// Función para contar la cantidad de mosquitos vivos
-function cantVivos() {
-  return mosquitos.filter(f=>!f.isDead)?.length ?? 0;
 }
 
 // Función para matar a todos los mosquitos
