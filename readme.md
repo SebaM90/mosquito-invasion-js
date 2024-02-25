@@ -22,7 +22,7 @@ Este proyecto consiste en una página web que simula una invasión de mosquitos.
 
 ![Captura de pantalla de Mosquito Invasion JS](https://raw.githubusercontent.com/SebaM90/mosquito-invasion-js/main/screenCapture.jpg)
 
-![Captura de video de Mosquito Invasion JS](https://github.com/SebaM90/mosquito-invasion-js/raw/main/recordedScreen.mp4)
+![Descargar Video ⏬](https://github.com/SebaM90/mosquito-invasion-js/raw/main/recordedScreen.mp4)
 
 
 ## Créditos
